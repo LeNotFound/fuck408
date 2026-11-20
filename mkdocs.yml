@@ -152,3 +152,5 @@ nav:
       - CSMA-CD限制条件: 04_计算机网络/17_CSMA-CD限制条件.md
       - 网络设备: 04_计算机网络/18_网络设备.md
   - 关于与部署: about.md
+extra_css:
+  - stylesheets/extra.css

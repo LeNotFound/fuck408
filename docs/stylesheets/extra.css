@@ -1,0 +1,34 @@
+/* 全局表格排版强化：彻底防止表格列被压缩成单字竖条 */
+.md-typeset table:not([class]) {
+  display: block;
+  overflow-x: auto;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* 核心说明/切入点等长文本列设置合理最小宽度，允许自然换行 */
+.md-typeset table:not([class]) th:last-child,
+.md-typeset table:not([class]) td:last-child {
+  min-width: 220px;
+  white-space: normal;
+}
+
+/* 其余指标列（算法名、复杂度等）禁止极端压缩断字 */
+.md-typeset table:not([class]) th:not(:last-child),
+.md-typeset table:not([class]) td:not(:last-child) {
+  min-width: 85px;
+  white-space: nowrap;
+}
+
+/* 序号与极短列 */
+.md-typeset table:not([class]) th:first-child,
+.md-typeset table:not([class]) td:first-child {
+  min-width: 50px;
+}
