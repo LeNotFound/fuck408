@@ -39,7 +39,7 @@
 以太网（IEEE 802.3）采用 CSMA/CD（载波监听多路访问/碰撞检测）机制，其核心前提是发送站点在发送信号的同时具备检测信道中是否存在碰撞的能力（边发边听）。然而，在无线局域网（IEEE 802.11）环境中，物理特性决定了 CSMA/CD 无法有效运行，主要原因如下：
 
 #### (1) 硬件物理特性的限制（发射功率远超接收灵敏度）
-无线通信依靠空间电磁波传播，信号衰减与距离平方甚至高次方成正比。站点在发射信号时的功率远大于其天线接收到的微弱信号。发射信号的电平往往高出接收信号电平 $60 \sim 100 \text{ dB}$$ \text{（信号功率相差} $$10^6 \sim 10^{10}$ 倍）。如果站点在发送信号的同时尝试监听信道，强烈的本地发射信号会彻底淹没任何来自其他站点的微弱碰撞信号。在技术成本上，制造能够实现“边发边听”的全双工硬件极为昂贵且难以普及。
+无线通信依靠空间电磁波传播，信号衰减与距离平方甚至高次方成正比。站点在发射信号时的功率远大于其天线接收到的微弱信号。发射信号的电平往往高出接收信号电平 $60 \sim 100 \text{ dB}$（信号功率相差 $10^6 \sim 10^{10}$ 倍）。如果站点在发送信号的同时尝试监听信道，强烈的本地发射信号会彻底淹没任何来自其他站点的微弱碰撞信号。在技术成本上，制造能够实现“边发边听”的全双工硬件极为昂贵且难以普及。
 
 #### (2) 碰撞检测的局限性（信道空间特异性）
 碰撞只在接收站点的天线处产生破坏性干扰才有实际意义。由于多径效应、障碍物衰减以及电磁波的空间发散，即使发送站点在本地天线处未检测到碰撞，接收站点处也可能由于两个异地发射源的信号同时到达而引发碰撞破坏；反之，发送端检测到噪声，接收端却可能接收良好。
@@ -136,8 +136,8 @@
   CTS 意在预约从数据帧开始至事务最终确认完成的时长。隐蔽站收到 CTS 时设置的 NAV 值为：
   $$\text{NAV} = \text{Duration}_{\text{CTS}} = \text{SIFS} + t_{\text{DATA}} + \text{SIFS} + t_{\text{ACK}}$$
   其中：
-  - $$ \text{t_{\text{DATA}} = \dfrac{\text{数据帧比特长度}}{\text{数据传输速率}}} $$
-  - $$ \text{t_{\text{ACK}} = \dfrac{\text{ACK 帧比特长度}}{\text{控制帧传输速率}}} $$
+  - $t_{\text{DATA}} = \dfrac{\text{数据帧比特长度}}{\text{数据传输速率}}$
+  - $t_{\text{ACK}} = \dfrac{\text{ACK 帧比特长度}}{\text{控制帧传输速率}}$
 
 ---
 
@@ -183,11 +183,11 @@ IEEE 802.11 规定在发送任何一帧前，站点必须在信道空闲后持�
   3. 站点成功发送完一个数据帧后，为保证竞争信道的公平性，强制执行一次退避。
 * **退避窗口计算公式**：
   退避时间由离散的退避时隙（SlotTime）构成：
-  $$ \text{退避时延} = \text{SlotTime} \times r $$
+  $$\text{退避时延} = \text{SlotTime} \times r$$
   其中随机整数 $r$ 服从均匀分布：
   $$r \in [0, CW - 1]$$
   - 初始状态下竞争窗口 $CW = CW_{\min}$；
-  - 每次重传失败（未收到 ACK），竞争窗口翻倍扩张：$CW_{\text{new}} = 2 \times (CW_{\text{old}} + 1) - 1$$ \text{，直到达到上限} $$CW_{\max}$；
+  - 每次重传失败（未收到 ACK），竞争窗口翻倍扩张：$CW_{\text{new}} = 2 \times (CW_{\text{old}} + 1) - 1$，直到达到上限 $CW_{\max}$；
   - 传输成功后，竞争窗口立即恢复为初始值 $CW_{\min}$。
 * **退避计数器“冻结”及恢复机制**：
   - 站点在信道空闲时，退避计数器每经过一个 SlotTime 减 1；
@@ -221,7 +221,7 @@ IEEE 802.11 帧头包含多达 4 个 48 位（6 字节）MAC 地址字段。其�
 ### 2024 年全国统考 408 计算机联考第 36 题
 
 #### 1. 真题原题
-在采用 CSMA/CA 的 802.11 无线局域网中，$\text{DIFS} = 120\ \mu\text{s}$，$\text{SIFS} = 28\ \mu\text{s}$$ \text{，RTS、CTS 和 ACK 帧的传输时延分别是} $$3\ \mu\text{s}$、$2\ \mu\text{s}$$ \text{和} $$2\ \mu\text{s}$$ \text{，忽略信号传播时延。若主机 A 欲向 AP 发送一个总长度为} $$1998\ \text{B}$$ \text{的数据帧，无线链路带宽为} $$54\ \text{Mb/s}$，则隐藏站 B 收到 AP 发送的 CTS 帧时，设置的网络分配向量 NAV 的值是（ ）。
+在采用 CSMA/CA 的 802.11 无线局域网中，$\text{DIFS} = 120\ \mu\text{s}$，$\text{SIFS} = 28\ \mu\text{s}$，RTS、CTS 和 ACK 帧的传输时延分别是 $3\ \mu\text{s}$、$2\ \mu\text{s}$ 和 $2\ \mu\text{s}$，忽略信号传播时延。若主机 A 欲向 AP 发送一个总长度为 $1998\ \text{B}$ 的数据帧，无线链路带宽为 $54\ \text{Mb/s}$，则隐藏站 B 收到 AP 发送的 CTS 帧时，设置的网络分配向量 NAV 的值是（ ）。
 
 A. $326\ \mu\text{s}$  
 B. $354\ \mu\text{s}$  
@@ -285,7 +285,7 @@ D. IFS4
   在 IEEE 802.11 协议标准中，各类帧间间隔设计原则为：**优先级越高，等待时间越短**。
   其持续时间满足严格单调递增关系：
   $$\text{SIFS} < \text{PIFS} < \text{DIFS}$$
-  因此，在上述四个间隔中，$\text{IFS1}$$ \text{为 DIFS，时长最长；} $$\text{IFS2}$、$\text{IFS3}$、$\text{IFS4}$ 均为 SIFS，时长最短。
+  因此，在上述四个间隔中，$\text{IFS1}$ 为 DIFS，时长最长；$\text{IFS2}$、$\text{IFS3}$、$\text{IFS4}$ 均为 SIFS，时长最短。
 
 #### 3. 正确答案
 **A**
@@ -380,17 +380,17 @@ D. 00-12-34-56-78-9a, 00-12-34-56-78-9c, 00-12-34-56-78-9b
 ### 2. 混合链路端到端传输时延分析大题模型
 若考题要求计算主机 H 发送一个分组到达路由器 R 的总时延（忽略排队与处理时延），需分段精确建模：
 
-$$ \text{总时延} T_{\text{total}} = T_{\text{无线段}} + T_{\text{有线段}} $$
+$$\text{总时延} T_{\text{total}} = T_{\text{无线段}} + T_{\text{有线段}}$$
 
 #### (1) 无线接入段时延（考虑非握手直接传输或 RTS/CTS 握手传输）：
 * 若不采用 RTS/CTS 机制：
-  $$ \text{T_{\text{无线段}} = \text{DIFS} + \overline{\text{退避时延}} + \frac{L_{\text{802.11帧}}}{R_{\text{无线}}} + \tau_{\text{无线传播}} + \text{SIFS} + \frac{L_{\text{ACK}}}{R_{\text{控制}}} + \tau_{\text{ACK传播}}} $$
+  $$T_{\text{无线段}} = \text{DIFS} + \overline{\text{退避时延}} + \frac{L_{\text{802.11帧}}}{R_{\text{无线}}} + \tau_{\text{无线传播}} + \text{SIFS} + \frac{L_{\text{ACK}}}{R_{\text{控制}}} + \tau_{\text{ACK传播}}$$
 * 若采用 RTS/CTS 握手机制：
-  $$ \text{T_{\text{无线段}} = \text{DIFS} + \overline{\text{退避时延}} + t_{\text{RTS}} + \text{SIFS} + t_{\text{CTS}} + \text{SIFS} + t_{\text{DATA}} + \text{SIFS} + t_{\text{ACK}} + \sum \tau_{\text{传播}}} $$
+  $$T_{\text{无线段}} = \text{DIFS} + \overline{\text{退避时延}} + t_{\text{RTS}} + \text{SIFS} + t_{\text{CTS}} + \text{SIFS} + t_{\text{DATA}} + \text{SIFS} + t_{\text{ACK}} + \sum \tau_{\text{传播}}$$
 
 #### (2) 有线以太网段时延：
 以太网通常工作在全双工交换模式下，无碰撞检测与退避开销：
-$$ \text{T_{\text{有线段}} = \frac{L_{\text{以太网帧}}}{R_{\text{有线}}} + \tau_{\text{有线传播}}} $$
+$$T_{\text{有线段}} = \frac{L_{\text{以太网帧}}}{R_{\text{有线}}} + \tau_{\text{有线传播}}$$
 
 ---
 
@@ -402,7 +402,7 @@ $$ \text{T_{\text{有线段}} = \frac{L_{\text{以太网帧}}}{R_{\text{有线}}
 | :--- | :--- | :--- |
 | **帧间间隔关系** | $\text{SIFS} < \text{PIFS} < \text{DIFS}$ | 间隔越短，优先级越高；保障短控制交互优先完成 |
 | **CTS 载荷 NAV 计算** | $\text{NAV} = 2 \times \text{SIFS} + t_{\text{DATA}} + t_{\text{ACK}}$ | 隐蔽站收到 CTS 后的信道保护期，杜绝数据碰撞 |
-| **退避时延基准** | $T_{\text{backoff}} = r \times \text{SlotTime},\ r \in [0, CW-1]$$ \text{| 随机竞争离散退避，重传时} $$CW$ 翻倍 |
+| **退避时延基准** | $T_{\text{backoff}} = r \times \text{SlotTime},\ r \in [0, CW-1]$ | 随机竞争离散退避，重传时 $CW$ 翻倍 |
 | **上行数据帧地址（To AP）** | 地址1: AP MAC；地址2: H MAC；地址3: 路由器 MAC | “1收2发3目的”，地址1决定当跳物理接收点 |
 | **下行数据帧地址（From AP）**| 地址1: H MAC；地址2: AP MAC；地址3: 路由器 MAC | “1收2发3源端”，地址1指向最终无线接收主机 |
 

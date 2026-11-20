@@ -190,7 +190,7 @@ DMA 的完整运行周期被严格划分为三个阶段：预处理、数据传�
   - 缺点：每个周期都需要进行一次总线申请与释放，总线握手控制开销略大于突发模式。
 
 ### 3) DMA 与 CPU 交替访存方式（Alternating Mode / 分时互补）
-- 机制：将一个 CPU 工作周期划分为前后两个微周期。前半周期 $T_1$$ \text{专属于 CPU 访存，后半周期} $$T_2$ 专属于 DMA 访存。总线控制权通过硬件时钟严密切分，双方各执一半。
+- 机制：将一个 CPU 工作周期划分为前后两个微周期。前半周期 $T_1$ 专属于 CPU 访存，后半周期 $T_2$ 专属于 DMA 访存。总线控制权通过硬件时钟严密切分，双方各执一半。
 - 硬件前提：主存的物理存取周期必须小于或等于 CPU 时钟周期的一半（即主存速度是 CPU 访存需求速度的两倍以上）。
 - 优缺点：
   - 优点：无需总线申请、仲裁与握手机制，CPU 与 DMA 零冲突、零等待，硬件并行度最高。
@@ -348,11 +348,11 @@ D. 数据块传送结束时，会产生“DMA 传送结束”的中断请求
 - 字段名称：CHS（Cylinder-Head-Sector）物理地址体系的 3 个字段分别为**柱面号（或磁道号）**、**磁头号（或盘面号）**、**扇区号**。
 - 位数推导计算：
   - 柱面数等于每个盘面的磁道数，即 20000 个柱面。柱面号字段位数至少为：
-    $$ \text{\lceil \log_2 20000 \rceil = 15 \text{ 位} \quad (2^{14} = 16384 < 20000 \le 32768 = 2^{15})} $$
+    $$\lceil \log_2 20000 \rceil = 15 \text{ 位} \quad (2^{14} = 16384 < 20000 \le 32768 = 2^{15})$$
   - 磁头数等于总盘面数。磁盘包含 4 个双面盘片，盘面总数为 $4 \times 2 = 8$ 个。磁头号字段位数至少为：
-    $$ \text{\log_2 8 = 3 \text{ 位}} $$
+    $$\log_2 8 = 3 \text{ 位}$$
   - 每个磁道包含 500 个扇区。扇区号字段位数至少为：
-    $$ \text{\lceil \log_2 500 \rceil = 9 \text{ 位} \quad (2^8 = 256 < 500 \le 512 = 2^9)} $$
+    $$\lceil \log_2 500 \rceil = 9 \text{ 位} \quad (2^8 = 256 < 500 \le 512 = 2^9)$$
 
 #### 第 (2) 问解析：
 - 一个扇区的平均存取时间（$T_{\text{access}}$）由三部分构成：
@@ -372,9 +372,9 @@ D. 数据块传送结束时，会产生“DMA 传送结束”的中断请求
 - 总线请求次数计算：
   每个扇区记录的数据量为 512 字节。
   磁盘控制器中的数据缓冲区大小为 64 位，即：
-  $$ \text{B_{\text{buffer}} = \frac{64 \text{ bit}}{8 \text{ bit/B}} = 8 \text{ 字节}} $$
+  $$B_{\text{buffer}} = \frac{64 \text{ bit}}{8 \text{ bit/B}} = 8 \text{ 字节}$$
   在采用周期挪用 DMA 方式读写一个扇区时，缓冲区每填满 8 字节，DMA 控制器就发出一次总线请求，因此总线请求次数为：
-  $$ \text{N_{\text{req}} = \frac{512 \text{ B}}{8 \text{ B}} = 64 \text{ 次}} $$
+  $$N_{\text{req}} = \frac{512 \text{ B}}{8 \text{ B}} = 64 \text{ 次}$$
 - 总线控制权仲裁与原因分析：
   - 仲裁结论：**DMA 控制器可以获得总线使用权**。
   - 成因分析：
@@ -435,16 +435,16 @@ D. Ⅲ、Ⅳ
 
 ### 核心公式推导体系：
 1. 磁盘旋转一周时间：
-   $$ \text{t_{\text{round}} = \frac{60}{R} \text{ (秒)} = \frac{60 \times 10^3}{R} \text{ (毫秒)}} $$
+   $$t_{\text{round}} = \frac{60}{R} \text{ (秒)} = \frac{60 \times 10^3}{R} \text{ (毫秒)}$$
    （其中 $R$ 为磁盘转速，单位为 rpm）
 2. 磁道数据传输率（道速率 $D_R$）：
-   $$ \text{D_R = \frac{\text{单磁道数据量}}{t_{\text{round}}} = \frac{N_{\text{sector}} \times S_{\text{size}}}{t_{\text{round}}}} $$
-   （其中 $N_{\text{sector}}$$ \text{为单磁道扇区数，} $$S_{\text{size}}$ 为单扇区字节数）
+   $$D_R = \frac{\text{单磁道数据量}}{t_{\text{round}}} = \frac{N_{\text{sector}} \times S_{\text{size}}}{t_{\text{round}}}$$
+   （其中 $N_{\text{sector}}$ 为单磁道扇区数，$S_{\text{size}}$ 为单扇区字节数）
 3. DMA 周期挪用请求的时间间隔 $T_{\text{req}}$：
    设 DMA 控制器内部数据缓冲区大小为 $B_{\text{buf}}$（字节），则外设装满该缓冲区所需时间为：
    $$T_{\text{req}} = \frac{B_{\text{buf}}}{D_R}$$
 4. 总线占用比率与 CPU 效率损失：
-   设总线时钟周期为 $\tau$$ \text{，完成一次总线读写（挪用一次总线）需消耗} $$k$$ \text{个总线周期（即挪用时间为} $$t_{\text{bus}} = k \cdot \tau$）。
+   设总线时钟周期为 $\tau$，完成一次总线读写（挪用一次总线）需消耗 $k$ 个总线周期（即挪用时间为 $t_{\text{bus}} = k \cdot \tau$）。
    则 DMA 传输期间，总线利用率（DMA 占用带宽比例）为：
    $$\eta = \frac{t_{\text{bus}}}{T_{\text{req}}} = \frac{k \cdot \tau}{B_{\text{buf}} / D_R}$$
    CPU 因总线被挪用而损失的访存带宽即为 $\eta$。
@@ -453,7 +453,7 @@ D. Ⅲ、Ⅳ
 
 ## 2. 硬件缓冲防溢出临界延迟（Overrun Limit）分析
 在实时 I/O 大题中，常考察总线仲裁延迟对硬件安全的影响：
-- 设外设输入数据流速为 $D_R$$ \text{，DMA 缓冲区容量为} $$B_{\text{buf}}$。
+- 设外设输入数据流速为 $D_R$，DMA 缓冲区容量为 $B_{\text{buf}}$。
 - 临界响应时间上限：从外设发出 DMA 请求开始，到该次数据传输首字节真正被读走移入主存，系统总线仲裁机构允许的最大延迟时间 $t_{\text{latency}}$ 必须满足：
   $$t_{\text{latency}} \le \frac{B_{\text{buf}}}{D_R}$$
 - 若由于总线拥堵或 CPU 长时间关总线导致响应时间超过此阈值，外设新送入的数据将强行冲毁缓冲区未移出的数据，造成不可恢复的 Data Overrun 硬件故障。此即 2022#44 所考查的“DMA 仲裁必须具有最高优先级”的本质物理约束。
@@ -461,7 +461,7 @@ D. Ⅲ、Ⅳ
 ---
 
 ## 3. DMA 与中断全系统 CPU 开销对比模型
-设系统需要向主存读入一个大小为 $N$$ \text{字节的数据块，总线宽度为} $$W$$ \text{字节（每次传输} $$W$$ \text{字节），CPU 主频为} $$f$。
+设系统需要向主存读入一个大小为 $N$ 字节的数据块，总线宽度为 $W$ 字节（每次传输 $W$ 字节），CPU 主频为 $f$。
 
 ```text
 [中断方式 CPU 总开销]
@@ -503,7 +503,7 @@ D. Ⅲ、Ⅳ
 | :--- | :--- | :--- |
 | **数据传输控制者** | CPU 软件（中断服务程序） | DMA 控制器（纯硬件状态机） |
 | **总线主控权归属** | 全程归 CPU 控制 | 数据传送阶段归 DMA 控制器所有 |
-| **数据传输通路** | 外设 $\leftrightarrow$$ \text{CPU 内部寄存器} $$\leftrightarrow$$ \text{主存 | 外设接口} $$\leftrightarrow$ 主存储器（绕过 CPU） |
+| **数据传输通路** | 外设 $\leftrightarrow$ CPU 内部寄存器 $\leftrightarrow$ 主存 | 外设接口 $\leftrightarrow$ 主存储器（绕过 CPU） |
 | **硬件系统代价** | 仅需简单接口中断触发逻辑 | 需复杂的 DMA 控制器、总线仲裁机构 |
 | **数据传送基本单位** | 字（Word）或字节（Byte） | 数据块（Block，如扇区、页、帧） |
 | **请求响应时机** | **当前指令执行周期结束**（指令边界） | **当前总线机器周期结束**（访存周期边界） |
@@ -520,13 +520,13 @@ D. Ⅲ、Ⅳ
 
 ## 3. 核心速算公式集锦
 - **DMA 请求总线次数**：
-  $$ \text{N_{\text{req}} = \frac{\text{待传数据总量 (字节)}}{\text{DMA 内部缓冲寄存器容量 (字节)}}} $$
+  $$N_{\text{req}} = \frac{\text{待传数据总量 (字节)}}{\text{DMA 内部缓冲寄存器容量 (字节)}}$$
 - **外设装满 DMA 缓冲时间（DMA 请求间隔）**：
-  $$ \text{T_{\text{interval}} = \frac{\text{DMA 缓冲容量 (Byte)}}{\text{外设数据传输速率 (Byte/s)}}} $$
+  $$T_{\text{interval}} = \frac{\text{DMA 缓冲容量 (Byte)}}{\text{外设数据传输速率 (Byte/s)}}$$
 - **总线占用率（带宽开销）**：
-  $$ \text{\eta = \frac{\text{单次 DMA 占用总线时长}}{T_{\text{interval}}}} $$
+  $$\eta = \frac{\text{单次 DMA 占用总线时长}}{T_{\text{interval}}}$$
 - **磁盘扇区 CHS 编码位数要求**：
-  $$ \text{总位数} = \lceil \log_2(\text{柱面数}) \rceil + \lceil \log_2(\text{磁头数}) \rceil + \lceil \log_2(\text{单磁道扇区数}) \rceil $$
+  $$\text{总位数} = \lceil \log_2(\text{柱面数}) \rceil + \lceil \log_2(\text{磁头数}) \rceil + \lceil \log_2(\text{单磁道扇区数}) \rceil$$
 
 ## 4. 408 考场高频陷阱与判断口诀
 1. **指令边界 vs 周期边界**：

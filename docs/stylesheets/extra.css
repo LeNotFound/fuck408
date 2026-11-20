@@ -1,8 +1,12 @@
 /* 全局表格排版强化：彻底防止表格列被压缩成单字竖条 */
+.md-typeset__table {
+  overflow-x: auto !important;
+  margin: 1em 0;
+}
+
 .md-typeset table:not([class]) {
-  display: block;
-  overflow-x: auto;
-  min-width: 100%;
+  display: table !important;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -13,22 +17,23 @@
   line-height: 1.6;
 }
 
-/* 核心说明/切入点等长文本列设置合理最小宽度，允许自然换行 */
+/* 最后一列（通常为性质、核心细节或考点总结），允许自动换行且设置合理底线宽度 */
 .md-typeset table:not([class]) th:last-child,
 .md-typeset table:not([class]) td:last-child {
-  min-width: 220px;
-  white-space: normal;
+  min-width: 200px !important;
+  white-space: normal !important;
 }
 
-/* 其余指标列（算法名、复杂度等）禁止极端压缩断字 */
+/* 其余指标列（算法名、复杂度、稳定性等）禁止断字折行 */
 .md-typeset table:not([class]) th:not(:last-child),
 .md-typeset table:not([class]) td:not(:last-child) {
-  min-width: 85px;
-  white-space: nowrap;
+  min-width: 90px !important;
+  white-space: nowrap !important;
 }
 
-/* 序号与极短列 */
+/* 首列（通常为算法名称、知识点名称）给予充裕宽度 */
 .md-typeset table:not([class]) th:first-child,
 .md-typeset table:not([class]) td:first-child {
-  min-width: 50px;
+  min-width: 120px !important;
+  white-space: nowrap !important;
 }
