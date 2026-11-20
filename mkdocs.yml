@@ -1,0 +1,154 @@
+site_name: Fuck408 - 408 计算机考研高频微考点全景题库
+site_description: 针对 408 考研近十年考查频次 >= 3 次的 89 个微观细化核心考点专精解析库
+site_author: LeNotFound
+site_url: https://fuck408.pages.dev/
+repo_url: https://github.com/LeNotFound/fuck408
+repo_name: LeNotFound/fuck408
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换至深色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换至浅色模式
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tilde
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.keys
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+nav:
+  - 首页: index.md
+  - 数据结构:
+      - 排序算法: 01_数据结构/01_排序算法.md
+      - B树: 01_数据结构/02_B树.md
+      - 散列表: 01_数据结构/03_散列表.md
+      - 哈夫曼树: 01_数据结构/04_哈夫曼树.md
+      - 链表: 01_数据结构/05_链表.md
+      - 复杂度分析: 01_数据结构/06_复杂度分析.md
+      - 堆的概念: 01_数据结构/07_堆的概念.md
+      - 特殊矩阵: 01_数据结构/08_特殊矩阵.md
+      - 入栈出栈序列: 01_数据结构/09_入栈出栈序列.md
+      - 二叉排序树: 01_数据结构/10_二叉排序树.md
+      - 关键路径: 01_数据结构/11_关键路径.md
+      - 顺序表: 01_数据结构/12_顺序表.md
+      - 拓扑排序: 01_数据结构/13_拓扑排序.md
+      - 数组查找: 01_数据结构/14_数组查找.md
+      - 二叉树的遍历: 01_数据结构/15_二叉树的遍历.md
+      - 最小生成树: 01_数据结构/16_最小生成树.md
+      - 树的概念: 01_数据结构/17_树的概念.md
+      - 邻接矩阵: 01_数据结构/18_邻接矩阵.md
+      - 平均查找长度: 01_数据结构/19_平均查找长度.md
+      - 队列: 01_数据结构/20_队列.md
+      - 二叉树遍历: 01_数据结构/21_二叉树遍历.md
+      - 图的概念: 01_数据结构/22_图的概念.md
+      - 归并排序: 01_数据结构/23_归并排序.md
+      - 插入排序: 01_数据结构/24_插入排序.md
+      - 外部排序: 01_数据结构/25_外部排序.md
+  - 计算机组成原理:
+      - 中断IO: 02_计算机组成原理/01_中断IO.md
+      - 补码: 02_计算机组成原理/02_补码.md
+      - IEEE浮点数表示: 02_计算机组成原理/03_IEEE浮点数表示.md
+      - 指令寻址方式: 02_计算机组成原理/04_指令寻址方式.md
+      - 计算机性能指标: 02_计算机组成原理/05_计算机性能指标.md
+      - 寄存器类型: 02_计算机组成原理/06_寄存器类型.md
+      - 大小端: 02_计算机组成原理/07_大小端.md
+      - 异常和中断: 02_计算机组成原理/08_异常和中断.md
+      - DMA: 02_计算机组成原理/09_DMA.md
+      - 总线指标: 02_计算机组成原理/10_总线指标.md
+      - cache映射方式: 02_计算机组成原理/11_cache映射方式.md
+      - cache概念: 02_计算机组成原理/12_cache概念.md
+      - 类型转换: 02_计算机组成原理/13_类型转换.md
+      - TLB: 02_计算机组成原理/14_TLB.md
+      - 标志寄存器: 02_计算机组成原理/15_标志寄存器.md
+      - 数据通路: 02_计算机组成原理/16_数据通路.md
+      - 流水线冒险: 02_计算机组成原理/17_流水线冒险.md
+      - 流水线概念: 02_计算机组成原理/18_流水线概念.md
+      - 主存容量的扩展: 02_计算机组成原理/19_主存容量的扩展.md
+      - 指令体系结构: 02_计算机组成原理/20_指令体系结构.md
+      - 运算电路: 02_计算机组成原理/21_运算电路.md
+      - 计算机体系结构: 02_计算机组成原理/22_计算机体系结构.md
+  - 操作系统:
+      - 虚拟页式管理: 03_操作系统/01_虚拟页式管理.md
+      - 处理机调度算法: 03_操作系统/02_处理机调度算法.md
+      - 地址翻译: 03_操作系统/03_地址翻译.md
+      - 进程状态: 03_操作系统/04_进程状态.md
+      - 操作系统概念: 03_操作系统/05_操作系统概念.md
+      - 缺页异常: 03_操作系统/06_缺页异常.md
+      - 页表: 03_操作系统/07_页表.md
+      - 用户态和内核态: 03_操作系统/08_用户态和内核态.md
+      - 系统调用: 03_操作系统/09_系统调用.md
+      - 同步问题设计: 03_操作系统/10_同步问题设计.md
+      - inode: 03_操作系统/11_inode.md
+      - 外存空间管理: 03_操作系统/12_外存空间管理.md
+      - 页面置换算法: 03_操作系统/13_页面置换算法.md
+      - 文件物理结构: 03_操作系统/14_文件物理结构.md
+      - IO软件层次: 03_操作系统/15_IO软件层次.md
+      - 银行家算法: 03_操作系统/16_银行家算法.md
+      - 目录: 03_操作系统/17_目录.md
+      - 进程文件管理: 03_操作系统/18_进程文件管理.md
+      - 进程概念: 03_操作系统/19_进程概念.md
+      - 动态内存管理: 03_操作系统/20_动态内存管理.md
+      - 时间片轮转: 03_操作系统/21_时间片轮转.md
+      - 磁盘调度算法: 03_操作系统/22_磁盘调度算法.md
+      - 信号量: 03_操作系统/23_信号量.md
+      - clock算法: 03_操作系统/24_clock算法.md
+  - 计算机网络:
+      - ARQ协议: 04_计算机网络/01_ARQ协议.md
+      - OSI模型: 04_计算机网络/02_OSI模型.md
+      - 网络号和主机号: 04_计算机网络/03_网络号和主机号.md
+      - TCP四次挥手: 04_计算机网络/04_TCP四次挥手.md
+      - 子网划分: 04_计算机网络/05_子网划分.md
+      - 传输介质: 04_计算机网络/06_传输介质.md
+      - TCP滑动窗口: 04_计算机网络/07_TCP滑动窗口.md
+      - 信道利用率: 04_计算机网络/08_信道利用率.md
+      - TCP拥塞控制: 04_计算机网络/09_TCP拥塞控制.md
+      - NAT: 04_计算机网络/10_NAT.md
+      - CSMA-CA: 04_计算机网络/11_CSMA-CA.md
+      - TCP三次握手: 04_计算机网络/12_TCP三次握手.md
+      - 路由器: 04_计算机网络/13_路由器.md
+      - 交换机: 04_计算机网络/14_交换机.md
+      - UDP: 04_计算机网络/15_UDP.md
+      - 奈奎斯特定理: 04_计算机网络/16_奈奎斯特定理.md
+      - CSMA-CD限制条件: 04_计算机网络/17_CSMA-CD限制条件.md
+      - 网络设备: 04_计算机网络/18_网络设备.md
+  - 关于与部署: about.md

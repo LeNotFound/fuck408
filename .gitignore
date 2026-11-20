@@ -1,0 +1,27 @@
+site/
+output/
+scratch/
+__pycache__/
+*.pyc
+*.tmp
+temp_*
+test_*
+*.html
+*.pdf
+*.docx
+.venv/
+.DS_Store
+*.log
+
+# Temp generator files
+prompt_*.txt
+scratch_prompt_*.txt
+scratch_prompts/
+show_packet.py
+tag_packets.json
+os_topics_data.json
+prepare_*.py
+check_*.py
+verify_*.py
+aggregate_*.py
+build_full_document.py
