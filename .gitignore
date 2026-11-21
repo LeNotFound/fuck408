@@ -13,6 +13,12 @@ test_*
 .DS_Store
 *.log
 
+# VitePress & Node
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+dist/
+
 # Temp generator files
 prompt_*.txt
 scratch_prompt_*.txt
@@ -25,3 +31,11 @@ check_*.py
 verify_*.py
 aggregate_*.py
 build_full_document.py
+bisect_error.js
+check_mathjax.py
+find_escapes.py
+find_tab_math.py
+fix_addressing.py
+gen_vitepress_config.py
+update_config_katex.py
+write_config.py
